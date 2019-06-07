@@ -1,0 +1,104 @@
+﻿@page "/items"
+@inject IUriHelper uriHelper
+@inject AppState  appState
+@inject ShoppingCartService shoppingCartService
+
+
+@if (IsOpen)
+{
+    <div tabindex="-1" style="display:block" role="dialog" class="modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">                
+                <div class="modal-body">
+                    <strong>An item was added to your cart.</strong> To check out now simply <a href="#" class="alert-link">click here</a>.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="@onclick">Continue</button>
+                    <button type="button" class="btn btn-danger" onclick="@GoToCart">Check Out</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@if (items != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                Category
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Picture
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in items)
+        {
+            <tr>
+                <td>
+                    @item.Catagorie.Name
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Price.ToString("N2") $
+                </td>
+                <td><img src="@item.ItemPictureUrl" width="150" /></td>
+                <td>
+                    <a style="cursor:pointer" onclick="@(()=>addToCart(item.Id))">
+                        Add
+                        to cart
+                    </a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+
+@functions {
+
+        bool IsOpen { get; set; }
+        int? cartCount { get; set; }
+        void onclick(UIMouseEventArgs e)
+        {
+            IsOpen = !IsOpen;
+            StateHasChanged();
+        }
+
+        List<ShoppingCart.Core.Models.Items> items;
+        ShoppingCart.Core.ViewModels.ShoppingCartRemoveViewModel model;
+
+    protected override async Task OnInitAsync()
+    {        
+        items = await shoppingCartService.getItems();        
+    }
+
+    protected async Task addToCart(int id)
+    {
+        model = await shoppingCartService.AddToCart(id);
+        appState.setCartCount(model.CartCount);
+        IsOpen = true;
+        StateHasChanged();
+    }
+
+
+    void GoToCart(UIMouseEventArgs e)
+    {
+        IsOpen = false;
+        uriHelper.NavigateTo("/ShoppingCart");
+
+    }
+
+
+}

@@ -1,0 +1,21 @@
+﻿@inherits LayoutComponentBase
+
+<div class="sidebar">
+    <NavMenu />
+</div>
+
+<div class="main">
+    <div class="content px-4">
+        @Body
+    </div>
+</div>
+@functions
+{
+    protected override void OnInit()
+    {        
+        if(string.IsNullOrEmpty(ShoppingCartService.ShoppingCartId))
+        {
+            ShoppingCartService.ShoppingCartId = Guid.NewGuid().ToString();
+        }
+    }
+}
