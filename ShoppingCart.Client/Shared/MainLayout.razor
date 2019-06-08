@@ -9,13 +9,3 @@
         @Body
     </div>
 </div>
-@functions
-{
-    protected override void OnInit()
-    {        
-        if(string.IsNullOrEmpty(ShoppingCartService.ShoppingCartId))
-        {
-            ShoppingCartService.ShoppingCartId = Guid.NewGuid().ToString();
-        }
-    }
-}
