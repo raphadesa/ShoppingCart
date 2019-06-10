@@ -12,12 +12,7 @@ namespace ShoppingCart.Core.Services
     public class ShoppingCartService
     {
         ShoppingCartDBContext storeDB = new ShoppingCartDBContext();
-        public static string ShoppingCartId { get; set; }        
-        public ShoppingCartService()
-        {            
-            if(ShoppingCartId==null)
-            ShoppingCartId = Guid.NewGuid().ToString();
-        }
+        public static string ShoppingCartId { get; set; } = Guid.NewGuid().ToString();           
 
         public static async Task<ShoppingCartService> GetCart()
         {
