@@ -12,13 +12,13 @@ namespace ShoppingCart.Core.Models
         }
 
         public int Id { get; set; }
-        public int CatagorieId { get; set; }
+        public int CategoryId { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string ItemPictureUrl { get; set; }
         public byte[] InternalImage { get; set; }
 
-        public Catagories Catagorie { get; set; }
+        public Categories Category { get; set; }
         public ICollection<Carts> Carts { get; set; }
         public ICollection<OrderDetails> OrderDetails { get; set; }
     }
