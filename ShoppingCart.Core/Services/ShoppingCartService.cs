@@ -173,7 +173,7 @@ namespace ShoppingCart.Core.Services
         public async Task<List<Items>> getItems()
         {
             //Return the view
-            return await storeDB.Items.Include("Catagorie").ToListAsync();
+            return await storeDB.Items.Include("Category").ToListAsync();
 
         }
 
