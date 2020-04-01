@@ -5,7 +5,7 @@ namespace ShoppingCart.Core.Models
 {
     public partial class Categories
     {
-        public Catagories()
+        public Categories()
         {
             Items = new HashSet<Items>();
         }
