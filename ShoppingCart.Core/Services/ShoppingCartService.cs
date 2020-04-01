@@ -28,8 +28,7 @@ namespace ShoppingCart.Core.Services
             //Set up our ViewModel
             var viewModel = new ShoppingCartViewModel
             {
-                CartItems = await cart.GetCartItems(),
-                CartTotal = await cart.GetTotal()
+                CartItems = await cart.GetCartItems()                
             };
             //Return the view
             return viewModel;
