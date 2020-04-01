@@ -1,4 +1,4 @@
-﻿@page "/"
+@page "/"
 @namespace ShoppingCart.Client.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <!DOCTYPE html>
@@ -20,7 +20,9 @@
     </environment>    
 </head>
 <body>
-    <app>@(await Html.RenderComponentAsync<App>())</app>
+    <app>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
 
     <script src="_framework/blazor.server.js"></script>
 </body>
