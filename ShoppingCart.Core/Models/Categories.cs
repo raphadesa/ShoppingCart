@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ShoppingCart.Core.Models
 {
-    public partial class Catagories
+    public partial class Categories
     {
         public Catagories()
         {
