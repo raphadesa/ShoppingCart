@@ -1,6 +1,7 @@
-﻿@page "/ShoppingCart"
+@page "/MyShoppingCart"
 @inject AppState appState
 @inject ShoppingCartService shoppingCartService
+@layout ShoppingCartLayout
 @if (Model != null && Model.CartItems.Count() > 0)
 {
     <div class="panel panel-info">
@@ -28,7 +29,9 @@
                 @foreach (var item in Model.CartItems)
                 {
                     <tr>
-                        <td></td>
+                        <td>
+                            @item.Item.Name
+                        </td>
                         <td>
                             @item.Item.Price.ToString("N2") $
                         </td>
@@ -36,7 +39,7 @@
                             @item.Count.ToString()
                         </td>
                         <td>
-                            <a style="cursor:pointer" onclick="@(async()=> await removeFromCart(item.ItemId))">Remove From Cart</a>
+                            <a style="cursor:pointer" @onclick="(()=> removeFromCart(item.ItemId))">Remove From Cart</a>
                         </td>
                     </tr>
                 }
@@ -54,18 +57,16 @@
 }
 else
 {
-    <div>
-        <p>
-            There are no items in your cart currently. Please shop for something and add items..
-        </p>
+    <div class="custom-bg">        
+        <p>There are no items in your cart currently. Please shop for something and add items..</p>        
     </div>
 }
 
-@functions
+@code
 {
     ShoppingCartViewModel Model;
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         Model = await shoppingCartService.shoppingCart();
     }
@@ -75,7 +76,7 @@ else
         var vm = await shoppingCartService.RemoveFromCart(id);
         var cartItem = Model.CartItems.FirstOrDefault(c => c.ItemId == id);
         Model.CartItems.Remove(cartItem);
-        Model.CartTotal = vm.CartTotal;
+        //Model.CartTotal = vm.CartTotal;
         appState.setCartCount(vm.CartCount);
         StateHasChanged();
     }
