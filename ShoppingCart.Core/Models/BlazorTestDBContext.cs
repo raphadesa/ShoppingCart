@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -155,7 +155,7 @@ namespace ShoppingCart.Core.Models
                     .IsRequired()
                     .HasMaxLength(160);
 
-                entity.HasOne(d => d.Categorie)
+                entity.HasOne(d => d.Category)
                     .WithMany(p => p.Items)
                     .HasForeignKey(d => d.CategoryId)
                     .HasConstraintName("FK_dbo.Items_dbo.Categories_CategoryId");
