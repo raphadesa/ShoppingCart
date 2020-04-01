@@ -12,7 +12,7 @@ namespace ShoppingCart.Core.Models
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<Carts> Carts { get; set; }
-        public virtual DbSet<Catagories> Catagories { get; set; }
+        public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Items> Items { get; set; }
         public virtual DbSet<MigrationHistory> MigrationHistory { get; set; }
         public virtual DbSet<OrderDetails> OrderDetails { get; set; }
@@ -137,15 +137,15 @@ namespace ShoppingCart.Core.Models
                     .HasConstraintName("FK_dbo.Carts_dbo.Items_ItemId");
             });
 
-            modelBuilder.Entity<Catagories>(entity =>
+            modelBuilder.Entity<Categories>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
             });
 
             modelBuilder.Entity<Items>(entity =>
             {
-                entity.HasIndex(e => e.CatagorieId)
-                    .HasName("IX_CatagorieId");
+                entity.HasIndex(e => e.CategoryId)
+                    .HasName("IX_CategorieId");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
@@ -155,10 +155,10 @@ namespace ShoppingCart.Core.Models
                     .IsRequired()
                     .HasMaxLength(160);
 
-                entity.HasOne(d => d.Catagorie)
+                entity.HasOne(d => d.Categorie)
                     .WithMany(p => p.Items)
-                    .HasForeignKey(d => d.CatagorieId)
-                    .HasConstraintName("FK_dbo.Items_dbo.Catagories_CatagorieId");
+                    .HasForeignKey(d => d.CategoryId)
+                    .HasConstraintName("FK_dbo.Items_dbo.Categories_CategoryId");
             });
 
             modelBuilder.Entity<MigrationHistory>(entity =>
