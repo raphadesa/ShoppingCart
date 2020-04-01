@@ -8,6 +8,6 @@ namespace ShoppingCart.Core.ViewModels
     public class ShoppingCartViewModel
     {
         public List<Carts> CartItems { get; set; }
-        public decimal CartTotal { get; set; }
+        public decimal CartTotal => CartItems.Sum(c => c.Count * c.Item.Price);
     }
 }
