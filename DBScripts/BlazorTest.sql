@@ -113,15 +113,15 @@ CREATE TABLE [dbo].[Carts](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Catagories]    Script Date: 20/04/2018 13:36:07 ******/
+/****** Object:  Table [dbo].[Categories]    Script Date: 20/04/2018 13:36:07 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Catagories](
+CREATE TABLE [dbo].[Categories](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Name] [nvarchar](max) NULL,
- CONSTRAINT [PK_dbo.Catagories] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_dbo.Categories] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
@@ -134,7 +134,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Items](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[CatagorieId] [int] NOT NULL,
+	[CategoryId] [int] NOT NULL,
 	[Name] [nvarchar](160) NOT NULL,
 	[Price] [decimal](18, 2) NOT NULL,
 	[ItemPictureUrl] [nvarchar](1024) NULL,
@@ -377,21 +377,21 @@ INSERT [dbo].[Carts] ([ID], [CartId], [ItemId], [Count], [DateCreated]) VALUES (
 GO
 SET IDENTITY_INSERT [dbo].[Carts] OFF
 GO
-SET IDENTITY_INSERT [dbo].[Catagories] ON 
+SET IDENTITY_INSERT [dbo].[Categories] ON 
 GO
-INSERT [dbo].[Catagories] ([ID], [Name]) VALUES (1, N'Test')
+INSERT [dbo].[Categories] ([ID], [Name]) VALUES (1, N'Test')
 GO
-INSERT [dbo].[Catagories] ([ID], [Name]) VALUES (2, N'Test2')
+INSERT [dbo].[Categories] ([ID], [Name]) VALUES (2, N'Test2')
 GO
-SET IDENTITY_INSERT [dbo].[Catagories] OFF
+SET IDENTITY_INSERT [dbo].[Categories] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Items] ON 
 GO
-INSERT [dbo].[Items] ([ID], [CatagorieId], [Name], [Price], [ItemPictureUrl], [InternalImage]) VALUES (1, 1, N'Sausage', CAST(15.00 AS Decimal(18, 2)), N'https://www.kingsford.com/wp-content/uploads/2016/02/KFD_Header_SAUSAGES_CINEMAGRAPH-0106.jpg', NULL)
+INSERT [dbo].[Items] ([ID], [CategoryId], [Name], [Price], [ItemPictureUrl], [InternalImage]) VALUES (1, 1, N'Sausage', CAST(15.00 AS Decimal(18, 2)), N'https://www.kingsford.com/wp-content/uploads/2016/02/KFD_Header_SAUSAGES_CINEMAGRAPH-0106.jpg', NULL)
 GO
-INSERT [dbo].[Items] ([ID], [CatagorieId], [Name], [Price], [ItemPictureUrl], [InternalImage]) VALUES (2, 1, N'Chiken', CAST(10.00 AS Decimal(18, 2)), N'https://media1.s-nbcnews.com/i/newscms/2017_20/1215661/baked-chicken-today-170519-tease_15b214baba5431d761c7a46cf08e062c.jpg', NULL)
+INSERT [dbo].[Items] ([ID], [CategoryId], [Name], [Price], [ItemPictureUrl], [InternalImage]) VALUES (2, 1, N'Chiken', CAST(10.00 AS Decimal(18, 2)), N'https://media1.s-nbcnews.com/i/newscms/2017_20/1215661/baked-chicken-today-170519-tease_15b214baba5431d761c7a46cf08e062c.jpg', NULL)
 GO
-INSERT [dbo].[Items] ([ID], [CatagorieId], [Name], [Price], [ItemPictureUrl], [InternalImage]) VALUES (6, 1, N'Pizza', CAST(12.00 AS Decimal(18, 2)), N'http://www.pizzaduroy.fr/assets/images/slider/5.jpg', NULL)
+INSERT [dbo].[Items] ([ID], [CategoryId], [Name], [Price], [ItemPictureUrl], [InternalImage]) VALUES (6, 1, N'Pizza', CAST(12.00 AS Decimal(18, 2)), N'http://www.pizzaduroy.fr/assets/images/slider/5.jpg', NULL)
 GO
 SET IDENTITY_INSERT [dbo].[Items] OFF
 GO
@@ -429,11 +429,11 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[Carts] CHECK CONSTRAINT [FK_dbo.Carts_dbo.Items_ItemId]
 GO
-ALTER TABLE [dbo].[Items]  WITH CHECK ADD  CONSTRAINT [FK_dbo.Items_dbo.Catagories_CatagorieId] FOREIGN KEY([CatagorieId])
-REFERENCES [dbo].[Catagories] ([ID])
+ALTER TABLE [dbo].[Items]  WITH CHECK ADD  CONSTRAINT [FK_dbo.Items_dbo.Categories_CategoryId] FOREIGN KEY([CategoryId])
+REFERENCES [dbo].[Categories] ([ID])
 ON DELETE CASCADE
 GO
-ALTER TABLE [dbo].[Items] CHECK CONSTRAINT [FK_dbo.Items_dbo.Catagories_CatagorieId]
+ALTER TABLE [dbo].[Items] CHECK CONSTRAINT [FK_dbo.Items_dbo.Categories_CategoryId]
 GO
 ALTER TABLE [dbo].[OrderDetails]  WITH CHECK ADD  CONSTRAINT [FK_dbo.OrderDetails_dbo.Items_ItemId] FOREIGN KEY([ItemId])
 REFERENCES [dbo].[Items] ([ID])
