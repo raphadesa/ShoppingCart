@@ -1,8 +1,8 @@
-﻿@page "/items"
-@inject IUriHelper uriHelper
-@inject AppState  appState
+@page "/items"
+@inject NavigationManager navigationManager
+@inject AppState appState
 @inject ShoppingCartService shoppingCartService
-
+@layout ShoppingCartLayout 
 
 @if (IsOpen)
 {
@@ -10,11 +10,11 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">                
                 <div class="modal-body">
-                    <strong>An item was added to your cart.</strong> To check out now simply <a href="#" class="alert-link">click here</a>.
+                    <strong>An item was added to your cart.</strong>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" onclick="@onclick">Continue</button>
-                    <button type="button" class="btn btn-danger" onclick="@GoToCart">Check Out</button>
+                    <button type="button" class="btn btn-primary" @onclick="onclick">Continue</button>
+                    <button type="button" class="btn btn-danger" @onclick="GoToCart">Check Out</button>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
         {
             <tr>
                 <td>
-                    @item.Catagorie.Name
+                    @item.Category.Name
                 </td>
                 <td>
                     @item.Name
@@ -55,7 +55,7 @@
                 </td>
                 <td><img src="@item.ItemPictureUrl" width="150" /></td>
                 <td>
-                    <a style="cursor:pointer" onclick="@(()=>addToCart(item.Id))">
+                    <a style="cursor:pointer" @onclick="(() => addToCart(item.Id))">
                         Add
                         to cart
                     </a>
@@ -66,22 +66,20 @@
 }
 
 
-@functions {
+@code {
 
-        bool IsOpen { get; set; }
-        int? cartCount { get; set; }
-        void onclick(UIMouseEventArgs e)
-        {
-            IsOpen = !IsOpen;
-            StateHasChanged();
-        }
+    bool IsOpen { get; set; }
+    int? cartCount { get; set; }
+    List<Items> items;
+    ShoppingCartRemoveViewModel model;
+    void onclick()
+    {
+        IsOpen = !IsOpen;        
+    }
 
-        List<ShoppingCart.Core.Models.Items> items;
-        ShoppingCart.Core.ViewModels.ShoppingCartRemoveViewModel model;
-
-    protected override async Task OnInitAsync()
-    {        
-        items = await shoppingCartService.getItems();        
+    protected override async Task OnInitializedAsync()
+    {
+        items = await shoppingCartService.getItems();
     }
 
     protected async Task addToCart(int id)
@@ -93,10 +91,10 @@
     }
 
 
-    void GoToCart(UIMouseEventArgs e)
+    void GoToCart()
     {
         IsOpen = false;
-        uriHelper.NavigateTo("/ShoppingCart");
+        navigationManager.NavigateTo("/MyShoppingCart");
 
     }
 
