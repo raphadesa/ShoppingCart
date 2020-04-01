@@ -6,4 +6,4 @@ This a simple Blazor Shopping Cart project based on the work of Louie Bacaj at h
 
 You can see a [live demo here](https://blazordemos.exceldev.com) !
 
-Updated to Server-Side Blazor preview 5
+Updated to Server-Side Blazor 3.1
