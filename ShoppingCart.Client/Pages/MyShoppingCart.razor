@@ -1,7 +1,6 @@
 @page "/MyShoppingCart"
 @inject AppState appState
 @inject ShoppingCartService shoppingCartService
-@layout ShoppingCartLayout
 @if (Model != null && Model.CartItems.Count() > 0)
 {
     <div class="panel panel-info">
