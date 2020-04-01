@@ -1,5 +1,5 @@
 # ShoppingCart
-<<<<<<< HEAD
+
 =======
 A Blazor Shopping Cart Demo
 
