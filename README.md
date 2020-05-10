@@ -2,7 +2,7 @@
 
 A Blazor Shopping Cart Demo
 
-![](https://hvprla.am.files.1drv.com/y4mc0hJc-vIcfrX_YzqLHXQta5sHlX-9fvBRkZHW_EZ1mL9_a_v8IWhHhK7WZiLmoP1dUlreA8vnb36RmNe4taDhqmCFJKe2mu5VBcOSGj7VU3JqVY4w2VCMgQAMZ50mNGdV-Szt9_Lxq16tIpLBi42l_mHmId-yqWgqbPVWDsyyPx-9R4BZpis12vUvaLLDHjUAwQkqIEwmpA9UTA1IQ-bnw/ShoppingCart.gif?psid=1)
+![](https://hvprla.am.files.1drv.com/y4mHGpD7OvUjaF3_hjkZVVWOInJK-936EFVcPygsFFaieKLJzQiNmbj1YxDhIN0a2ks6CnGnBI8CNfQEl0xyJuxUzT7kDI3m1-HdCMzHu_fdrByLqYJyJs68vT8z5q7CiP_8NbLI7qXORBp0UbqB7XXX8JgxX-oEm50cuzfJgX9tHi8tTDSnhUZfUZlRErW-bMT3XZ-fPlgbcTj9Ik8Lp9TSw/ShoppingCart.gif?psid=1)
 
 This a simple Blazor Shopping Cart project based on the work of Louie Bacaj at http://bacaj.azurewebsites.net/a-lightweight-shopping-cart-web-application-in-asp-net-mvc-5/
 
