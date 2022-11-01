@@ -9,3 +9,5 @@ This a simple Blazor Shopping Cart project based on the work of Louie Bacaj at h
 You can see a [live demo here](https://blazordemos.exceldev.com/shoppingcart) !
 
 Updated to Server-Side Blazor 3.1
+
+"This project is licensed under the terms of the MIT license."
